@@ -28,7 +28,7 @@ export class AuthenLibrary {
         let pa : PromptAuthen = new PromptAuthen();
         if(!config) config = AuthenLibrary.getDefaultConfigure();
         if(!config.hasConfigure()) {
-            return Promise.reject(new AuthenError(HTTP.NOT_FOUND,"Configuration not defined"));
+            return Promise.reject(new AuthenError("Configuration not defined",HTTP.NOT_FOUND));
         }
         return await pa.authenticate(username, password, config);
     }

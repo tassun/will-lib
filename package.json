@@ -1,6 +1,6 @@
 {
   "name": "will-lib",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Library classes",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "PasswordLibrary", 
+    "PasswordLibrary",
     "MailLibrary"
   ],
   "author": "tassun_oro@hotmail.com",
@@ -37,8 +37,8 @@
     "random-js": "^2.1.0",
     "randomcolor": "^0.6.2",
     "uuidv4": "^6.2.13",
-    "will-sql": "^1.0.13",
-    "will-util": "^1.0.1"
+    "will-sql": "^1.0.14",
+    "will-util": "^1.0.2"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.9",

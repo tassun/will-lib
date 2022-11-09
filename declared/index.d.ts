@@ -20,7 +20,7 @@ export declare class AuthenError extends Error {
     readonly code: number;
     readonly errno: number | undefined;
     readonly throwable: any;
-    constructor(code: number, message: string, errno?: number, throwable?: any);
+    constructor(message: string, code: number, errno?: number, throwable?: any);
 }
 
 export declare class AuthenLibrary {

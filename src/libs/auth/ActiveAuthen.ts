@@ -60,7 +60,7 @@ export class ActiveAuthen {
         return new Promise<boolean>((resolve, reject) => {
             ad.authenticate(username, password, function(aerr : any, auth: any) {
                 if (aerr) {
-                    reject(new AuthenError(HTTP.UNAUTHORIZED,"Unauthorized",401,aerr));
+                    reject(new AuthenError("Unauthorized",HTTP.UNAUTHORIZED,401,aerr));
                     return;
                 }
                 console.log("isAuthenticate",JSON.stringify(auth));
@@ -88,7 +88,7 @@ export class ActiveAuthen {
         return new Promise<ActiveUser>((resolve, reject) => {
             ad.findUser(sAMAccountName, function(ferr: any, user: any) {
                 if(ferr) {
-                    reject(new AuthenError(HTTP.NOT_FOUND,"User not found",404,ferr));
+                    reject(new AuthenError("User not found",HTTP.NOT_FOUND,404,ferr));
                     return;
                 }
                 if(user) {
@@ -103,7 +103,7 @@ export class ActiveAuthen {
                         lastName: ac.lastName
                     });
                 } else {
-                    reject(new AuthenError(HTTP.NOT_FOUND,"User not found"));
+                    reject(new AuthenError("User not found",HTTP.NOT_FOUND));
                 }
             });
         });
@@ -114,7 +114,7 @@ export class ActiveAuthen {
         if(valid) {
             return await this.getActiveUser(username, password, config);
         }
-        return Promise.reject(new AuthenError(HTTP.UNAUTHORIZED,"Invalid user or password",-3004));
+        return Promise.reject(new AuthenError("Invalid user or password",HTTP.UNAUTHORIZED,-3004));
     }
 
 }

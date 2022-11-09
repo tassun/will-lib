@@ -76,7 +76,7 @@ export class WowAuthentication extends BaseAuthentication {
             if(res.data.head) {
                 if(res.data.head.status!="success") {
                     let errmsg = res.data.head.statusmessage?res.data.head.statusmessage:"Authen fail";
-                    return Promise.reject(new AuthenError(HTTP.UNAUTHORIZED,errmsg));
+                    return Promise.reject(new AuthenError(errmsg,HTTP.UNAUTHORIZED));
                 }
                 if(res.data.body) {
                     let auth_token = {
@@ -93,7 +93,7 @@ export class WowAuthentication extends BaseAuthentication {
                     };
                 }
             }
-            return Promise.reject(new AuthenError(HTTP.UNAUTHORIZED,"Authen fail"));
+            return Promise.reject(new AuthenError("Authen fail",HTTP.UNAUTHORIZED));
         }).catch(function (error: any) {
             return Promise.reject(error);
         });

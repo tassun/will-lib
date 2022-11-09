@@ -33,9 +33,9 @@ export class ActiveLibrary {
     public async authenticate(username: string, password: string, config?: ActiveConfig, conn?: DBConnector) : Promise<ActiveUser> {
         let ad : ActiveAuthen = new ActiveAuthen();
         if(!config) config = await ActiveLibrary.getActiveConfig(conn, ActiveAuthen.getAccountDomain(username).domainName);
-        if(!config) return Promise.reject(new AuthenError(HTTP.NOT_FOUND,"Configuration not found"));
+        if(!config) return Promise.reject(new AuthenError("Configuration not found",HTTP.NOT_FOUND));
         if(!config.hasConfigure()) {
-            return Promise.reject(new AuthenError(HTTP.NOT_FOUND,"Configuration not defined"));
+            return Promise.reject(new AuthenError("Configuration not defined",HTTP.NOT_FOUND));
         }
         return await ad.authenticate(username, password, config);
     }
