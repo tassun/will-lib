@@ -1,6 +1,6 @@
 {
   "name": "will-lib",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Library classes",
   "main": "index.js",
   "scripts": {
@@ -37,8 +37,8 @@
     "random-js": "^2.1.0",
     "randomcolor": "^0.6.2",
     "uuidv4": "^6.2.13",
-    "will-sql": "^1.0.14",
-    "will-util": "^1.0.2"
+    "will-sql": "^1.0.15",
+    "will-util": "^1.0.3"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.9",
