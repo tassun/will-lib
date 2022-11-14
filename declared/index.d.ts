@@ -115,6 +115,12 @@ interface UserTokenInfo {
     code?: string;
     state?: string;
     nonce?: string;
+    prime?: string;
+    generator?: string;
+    privatekey?: string;
+    publickey?: string;
+    sharedkey?: string;
+    otherkey?: string;
 }
 declare class PasswordLibrary {
     private ht;

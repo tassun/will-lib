@@ -14,6 +14,7 @@ let pwd = Arguments.getString(args,"password","-pwd");
 let newpwd = Arguments.getString(args,"P@ssw0rd","-new");
 let opt = Arguments.getString(args,"test","-opt");
 let date = Arguments.getDate(args,new Date(),"-date");
+let useruuid = Arguments.getString(args,"","-uuid");
 console.log("date",date);
 
 function doTest() {
@@ -94,6 +95,21 @@ async function doChange() {
     }
 }
 
+async function doToken() {
+    try {
+        let conn = DBConnections.getDBConnector(section);
+        try {
+            let plib : PasswordLibrary = new PasswordLibrary();
+            let token = await plib.getUserTokenInfo(conn,useruuid as string);
+            console.log("token",token);
+        } catch(er) {
+            console.error(er);
+        }
+    } catch(ex) {
+        console.error(ex);
+    }
+}
+
 async function doLoginWow() {
     try {
         let alib = WowAuthentication.getInstance();
@@ -130,4 +146,6 @@ if(opt=="test") {
     doLoginWow();
 } else if(opt=="loginnews") {
     doLoginNews();
+} else if(opt=="token") {
+    doToken();
 }

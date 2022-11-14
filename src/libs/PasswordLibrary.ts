@@ -23,6 +23,12 @@ interface UserTokenInfo {
     code?: string;
     state?: string;
     nonce?: string;
+    prime?: string;
+    generator?: string;
+    privatekey?: string;
+    publickey?: string;
+    sharedkey?: string;
+    otherkey?: string;
 }
 
 class PasswordLibrary {
@@ -1048,6 +1054,7 @@ class PasswordLibrary {
         let result : UserTokenInfo = { useruuid: useruuid };
         let sql = new KnSQL("select * from tusertoken where useruuid = ?useruuid ");
         sql.set("useruuid",useruuid);
+        console.log(sql);
         let rs = await sql.executeQuery(conn);
         if(rs.rows && rs.rows.length>0) {
             let row = rs.rows[0];
@@ -1055,6 +1062,12 @@ class PasswordLibrary {
             result.code = row.code;
             result.state = row.state;
             result.nonce = row.nonce;
+            result.prime = row.prime;
+            result.generator = row.generator;
+            result.privatekey = row.privatekey;
+            result.publickey = row.publickey;
+            result.sharedkey = row.sharedkey;
+            result.otherkey = row.otherkey;
         }
         return Promise.resolve(result);
     }
