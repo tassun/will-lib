@@ -281,3 +281,25 @@ export declare class WowAuthentication extends BaseAuthentication {
     login(user: string, pwd: string, site?: string): Promise<WowResponseInfo>;
 }
 
+export interface TenantInfo {
+    tenantid: string;
+    tenantname: string;
+    applicationid: string;
+    publickeys: string;
+    privatekeys: string;
+}
+export interface BasicInfo {
+    user: string;
+    password: string;
+}
+export declare class BasicLibrary {
+    plainText?: string;
+    static getAuthorization(authorization?: string): string | undefined;
+    getBasicInfo(basic?: string): BasicInfo | undefined;
+    decodeBase64(base64: string): BasicInfo | undefined;
+    decodeWithKey(cipherText: string, privatekeys: string): BasicInfo | undefined;
+    decrypt(authorization: string, client?: string, conn?: DBConnector): Promise<BasicInfo | undefined>;
+    encodeWithKey(plainText: string, publickeys: string): string;
+    encrypt(plainText: string, client?: string, conn?: DBConnector): Promise<string>;
+    getTenantInfo(conn: DBConnector, client: string): Promise<TenantInfo | undefined>;
+}

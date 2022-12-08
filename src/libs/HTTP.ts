@@ -1,4 +1,5 @@
 export class HTTP {
+    public static readonly OK = 200;
     public static readonly BAD_REQUEST = 400;
     public static readonly UNAUTHORIZED = 401;
     public static readonly PAYMENT_REQUIRED = 402;

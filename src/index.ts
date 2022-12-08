@@ -4,6 +4,7 @@ export { ActiveLibrary } from "./libs/ActiveLibrary";
 export { AuthenError } from "./libs/AuthenError";
 export { AuthenLibrary } from "./libs/AuthenLibrary";
 export { AuthenToken, AuthenTokenData } from "./libs/AuthenToken";
+export { BasicLibrary, TenantInfo, BasicInfo } from "./libs/BasicLibrary";
 export { CaptchaLibrary } from "./libs/CaptchaLibrary";
 export { CaptcharInfo, captchar } from "./libs/Captchar";
 export { MailLibrary, MailInfo, MailConfig } from "./libs/MailLibrary";

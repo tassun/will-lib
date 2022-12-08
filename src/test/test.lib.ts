@@ -3,6 +3,7 @@ import { Arguments } from "will-util";
 import { PasswordLibrary } from "../libs/PasswordLibrary";
 import { WowAuthentication } from "../libs/auth/WowAuthentication";
 import { NewsAuthentication } from "../libs/auth/NewsAuthentication";
+import { BasicLibrary } from "../libs/BasicLibrary";
 import os from "os";
 
 let args = process.argv.slice(2);
@@ -15,6 +16,9 @@ let newpwd = Arguments.getString(args,"P@ssw0rd","-new");
 let opt = Arguments.getString(args,"test","-opt");
 let date = Arguments.getDate(args,new Date(),"-date");
 let useruuid = Arguments.getString(args,"","-uuid");
+let clientid = Arguments.getString(args,"","-cid","-client");
+let plaintext = Arguments.getString(args,"","-txt");
+let ciphertext = Arguments.getString(args,"","-ctxt");
 console.log("date",date);
 
 function doTest() {
@@ -130,6 +134,40 @@ async function doLoginNews() {
     }
 }
 
+async function doBasic() {
+    try {
+        let conn = DBConnections.getDBConnector(section);
+        try {
+            let blib : BasicLibrary = new BasicLibrary();
+            if(clientid) {
+                let info = await blib.getTenantInfo(conn,clientid as string);
+                console.log("tenant",info);    
+                if(plaintext) {
+                    let txt = await blib.encrypt(plaintext, clientid, conn);
+                    console.log("encrypt",txt);
+                }
+                if(ciphertext) {
+                    let txt = await blib.decrypt(ciphertext, clientid, conn);
+                    console.log("decrypt",txt);
+                }
+            } else {
+                if(plaintext) {
+                    let txt = await blib.encrypt(plaintext);
+                    console.log("encrypt",txt);
+                }
+                if(ciphertext) {
+                    let txt = await blib.decrypt(ciphertext);
+                    console.log("decrypt",txt);
+                }
+            }
+        } catch(er) {
+            console.error(er);
+        }
+    } catch(ex) {
+        console.error(ex);
+    }
+}
+
 if(opt=="test") {
     doTest();
 } else if(opt=="exam") {
@@ -148,4 +186,6 @@ if(opt=="test") {
     doLoginNews();
 } else if(opt=="token") {
     doToken();
+} else if(opt=="basic") {
+    doBasic();
 }
