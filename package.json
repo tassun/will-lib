@@ -1,6 +1,6 @@
 {
   "name": "will-lib",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Library classes",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "PasswordLibrary",
-    "MailLibrary"
+    "PasswordLibrary", 
+    "MailLibrary",
+    "BasicLibrary",
+	  "AuthenLibrary",
+	  "ActiveLibrary",
+	  "CaptchaLibrary"
   ],
   "author": "tassun_oro@hotmail.com",
   "license": "MIT",

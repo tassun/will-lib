@@ -12,7 +12,7 @@ export interface TenantInfo {
 }
 
 export interface BasicInfo {
-    user: string;
+    username: string;
     password: string;
 }
 
@@ -38,7 +38,7 @@ export class BasicLibrary {
             if(idx>0) {
                 let usr = basic.substring(0,idx);
                 let pwd = basic.substring(idx+1);
-                return {user: usr, password: pwd };
+                return {username: usr, password: pwd };
             }
         }
         return undefined;

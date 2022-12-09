@@ -140,3 +140,67 @@ async function testMail() {
 
 testMail();
 ```
+
+#### BasicLibrary
+
+BasicLibrary handle for basic authentication and basic authenticate with RSA from table `ttenant` setting with schema
+
+    CREATE TABLE `ttenant` (
+        `tenantid` VARCHAR(50) NOT NULL,
+        `tenantname` VARCHAR(100) NOT NULL,
+        `applicationid` VARCHAR(50) NOT NULL,
+        `inactive` VARCHAR(1) NOT NULL DEFAULT '0' COMMENT '1=Inactive',
+        `privatekeys` TEXT NOT NULL,
+        `publickeys` TEXT NOT NULL,
+        PRIMARY KEY (`tenantid`),
+        INDEX `applicationid` (`applicationid`)
+    )
+
+```typescript
+import { Arguments } from "will-util";
+import { DBConnections } from "will-sql";
+import { BasicLibrary } from "will-lib";
+
+let args = process.argv.slice(2);
+console.log("args = "+args);
+let section = Arguments.getString(args,"MYSQL","-ms");
+let clientid = Arguments.getString(args,"","-cid","-client");
+let plaintext = Arguments.getString(args,"","-txt");
+let ciphertext = Arguments.getString(args,"","-ctxt");
+
+async function doBasic() {
+    try {
+        let conn = DBConnections.getDBConnector(section);
+        try {
+            let blib : BasicLibrary = new BasicLibrary();
+            if(clientid) {
+                let info = await blib.getTenantInfo(conn,clientid as string);
+                console.log("tenant",info);    
+                if(plaintext) {
+                    let txt = await blib.encrypt(plaintext, clientid, conn);
+                    console.log("encrypt",txt);
+                }
+                if(ciphertext) {
+                    let txt = await blib.decrypt(ciphertext, clientid, conn);
+                    console.log("decrypt",txt);
+                }
+            } else {
+                if(plaintext) {
+                    let txt = await blib.encrypt(plaintext);
+                    console.log("encrypt",txt);
+                }
+                if(ciphertext) {
+                    let txt = await blib.decrypt(ciphertext);
+                    console.log("decrypt",txt);
+                }
+            }
+        } catch(er) {
+            console.error(er);
+        }
+    } catch(ex) {
+        console.error(ex);
+    }
+}
+
+testBasic();
+```

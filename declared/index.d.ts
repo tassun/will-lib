@@ -289,7 +289,7 @@ export interface TenantInfo {
     privatekeys: string;
 }
 export interface BasicInfo {
-    user: string;
+    username: string;
     password: string;
 }
 export declare class BasicLibrary {
